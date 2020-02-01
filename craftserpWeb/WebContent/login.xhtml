@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:p="http://primefaces.org/ui" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<title>Mi primer Login</title>
+
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></link>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Los iconos tipo Solid de Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css"></link>
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- Nuestro css-->
+<link rel="stylesheet" type="text/css" href="static/css/index.css"
+	th:href="@{/css/index.css}"></link>
+
+
+</head>
+
+
+<body >
+
+
+	<div class="modal-dialog text-center">
+		<div class="col-sm-8 main-section">
+			<div class="modal-content">
+				<div class="col-12 user-img" >
+					<img src="static/img/user.png" th:src="@{/img/user.png}" />
+				</div>
+				<h:form class="col-12" method="get">
+					<div class="form-group" id="user-group" >
+						<p:inputText required="true" value="#{beanLogin.codigoUsuario}"
+							maxlength="10" placeholder="Ingresa el Usuario"
+							requiredMessage="Debe ingresar su usuario." />
+							
+					</div>
+					<div class="form-group" id="contrasena-group">
+						<p:password required="true" value="#{beanLogin.clave}"
+							placeholder="Ingresa la contraseña"
+							requiredMessage="Debe ingresar su contraseña." />
+					</div>
+
+					<p:commandButton value="Ingresar"
+						action="#{beanLogin.accederSistema()}" class="btn btn-primary"
+						icon="fas fa-sign-in-alt" />
+
+					<!-- <p:messages id="mensajes" />
+ -->
+					<div class="col-12 forgot">
+						<!-- <a class="link" href="MODULO.SEGURIDAD/Administrador/registro_persona.xhtml">Recordar contrasena?</a> -->
+						<a class="link" href="MODULO.SEGURIDAD/Administrador/registro_persona.xhtml"> No tienes una cuenta?</a>
+					</div>
+					
+					
+					
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+

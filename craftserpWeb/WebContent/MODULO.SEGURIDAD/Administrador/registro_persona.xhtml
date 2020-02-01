@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no" />
+		<title>Manejo de datos Clientes</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form id="form1">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panel header="Registro de nueva persona">
+			<p:panelGrid columns="2">
+				<h:outputText value="CÉDULA:" />
+				<p:inputText value="#{beanPersona.persona.idCedula}" required="true"
+					requiredMessage="Debe ingresar el numero de cedula" maxlength="10"
+					placeholder="ingrese cédula">
+					<p:keyFilter regEx="/[0-9]/i" />
+				</p:inputText>
+
+				<h:outputText value="NOMBRE:" />
+				<p:inputText value="#{beanPersona.persona.nombre}" required="true"
+					requiredMessage="Debe ingresar el nombre "
+					placeholder="ingrese nombre" />
+
+				<h:outputText value="APELLIDO:" />
+				<p:inputText value="#{beanPersona.persona.apellido}" required="true"
+					requiredMessage="Debe ingresar el apellido"
+					placeholder="ingrese apellido" />
+
+				<h:outputText value="TELÉFONO:" />
+				<p:inputText value="#{beanPersona.persona.telefono}" required="true"
+					requiredMessage="Debe ingresar el telefono" maxlength="10" 
+					placeholder="ingrese teléfono">
+					<p:keyFilter regEx="/[0-9]/i" />
+				</p:inputText>
+
+				<h:outputText value="EMAIL:" />
+				<p:inputText value="#{beanPersona.persona.mail}" required="true"
+					requiredMessage="Debe ingresar el mail" placeholder="ingrese mail">
+
+				</p:inputText>
+				<h:outputText value="DIRECCIÓN:" />
+				<p:inputText value="#{beanPersona.persona.direccion}"
+					required="true" requiredMessage="Debe ingresar la direccion"
+					placeholder="ingrese dirección" />
+
+				<h:outputText value="GÉNERO:" />
+				<p:selectOneMenu value="#{beanPersona.persona.genero}" required="true"
+					style="width:190px" label="Genero">
+					<f:selectItem itemLabel="Selecionar uno" itemValue="0"
+						noSelectionOption="true">
+					</f:selectItem>
+					<f:selectItem itemLabel="Masculino" itemValue="Masculino">
+					</f:selectItem>
+					<f:selectItem itemLabel="Femenino" itemValue="Femenino">
+					</f:selectItem>
+				</p:selectOneMenu>
+
+				<h:outputText value="CONTRASEÑA:" />
+				<p:password value="#{beanPersona.persona.clave}" requiredMessage="Debe ingresar la contraseña"
+				required="true"
+					placeholder="ingrese contraseña" />
+
+				<h:outputText value="CIUDAD:" />
+				<p:selectOneMenu value="#{beanPersona.idCiudad}" style="width:190px" required="true"
+					requiredMessage="Escoga la ciudad" label="Ciudad">
+					<f:selectItem itemLabel="Selecionar uno" itemValue="0"  noSelectionOption="true" >
+					</f:selectItem>
+					<f:selectItems value="#{beanCiudad.listaCiudad}" var="c"
+						itemLabel="#{c.nombre}" itemValue="#{c.idCiudad}">
+					</f:selectItems>
+				</p:selectOneMenu>
+
+				<h:outputText value="ESTADO CIVIL" />
+				<p:selectOneMenu value="#{beanPersona.idEstadoCivil}" required="true"
+					style="width:190px" requiredMessage="Escoga el estado civil"
+					label="Estado Civil">
+					<f:selectItem itemLabel="Selecionar uno" itemValue="0"  noSelectionOption="true" >
+					</f:selectItem>
+					<f:selectItems value="#{beanEstadoCivil.listaEstadoCivil}" var="e"
+						itemLabel="#{e.nombre}" itemValue="#{e.idEstadoCivil}" >
+					</f:selectItems>
+				</p:selectOneMenu>
+
+				<h:outputText value="ROL: " />
+				<p:selectOneMenu value="#{beanPersona.idRol}" style="width:190px" required="true"
+					requiredMessage="Escoga el rol" label="Rol">
+					<f:selectItem itemLabel="Selecionar uno" itemValue="0"  noSelectionOption="true" >
+					</f:selectItem>
+					<f:selectItems value="#{beanRol.listaRol}" var="e"
+						itemLabel="#{e.nombre}" itemValue="#{e.idRol}" >
+					</f:selectItems>
+				</p:selectOneMenu>
+
+				<p:commandButton value="REGISTRAR" icon="pi pi-save"
+					update="@form,:form2"
+					action="#{beanPersona.actionListenerInsertarPersona()}"></p:commandButton>
+			</p:panelGrid>
+
+		</p:panel>
+
+	</h:form>
+	<br />
+	<h:form id="form2">
+		<p:panel header="DATOS REGISTRADOS">
+			<p:dataTable value="#{beanPersona.listaPersona}" reflow="true"
+				var="persona" paginator="true" rows="5">
+				<p:column headerText="CÉDULA">
+					<h:outputText value="#{persona.idCedula}" />
+				</p:column>
+				<p:column headerText="NOMBRE">
+					<h:outputText value="#{persona.nombre}" />
+				</p:column>
+				<p:column headerText="APELLIDO">
+					<h:outputText value="#{persona.apellido}" />
+				</p:column>
+				<p:column headerText="TELÉFONO">
+					<h:outputText value="#{persona.telefono}" />
+				</p:column>
+				<p:column headerText="CORREO">
+					<h:outputText value="#{persona.mail}" />
+				</p:column>
+				<p:column headerText="DIRECCIÓN">
+					<h:outputText value="#{persona.direccion}" />
+				</p:column>
+				<p:column headerText="GÉNERO">
+					<h:outputText value="#{persona.genero}" />
+				</p:column>
+				<p:column headerText="FECHA REGISTRO">
+					<h:outputText value="#{persona.fechaRegistro}" />
+				</p:column>
+				<p:column headerText="CONTRASEÑA">
+					<h:outputText value="#{persona.clave}" />
+				</p:column>
+				<p:column headerText="CIUDAD">
+					<h:outputText value="#{persona.segCiudad.nombre}" />
+				</p:column>
+				<p:column headerText="ESTADO CIVIL">
+					<h:outputText value="#{persona.segEstadoCivil.nombre}" />
+				</p:column>
+				<p:column headerText="ROL">
+					<h:outputText value="#{persona.segRole.nombre}" />
+				</p:column>
+				<p:column headerText="OPCIONES">
+					<p:commandButton update="@form" style="width:100px"
+						value="Eliminar" icon="pi pi-times"
+						action="#{beanPersona.actionListenerEliminarPersona(persona.idCedula)}">
+						<p:confirm header="Confirmation" message="Desea eliminar?"
+							icon="pi pi-exclamation-triangle" />
+					</p:commandButton>
+					<p:separator></p:separator>
+					<p:commandButton icon="pi pi-pencil" style="width:100px"
+						value="Editar"
+						actionListener="#{beanPersona.actionListenerSeleccionarPersona(persona)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<p:dialog header="Editor de información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="CÉDULA :" />
+			<h:outputText value="#{beanPersona.cedulaSelecionada.idCedula}" />
+			<br />
+			<p:panelGrid columns="2">
+				<h:outputText value="NOMBRE:" />
+				<p:inputText value="#{beanPersona.cedulaSelecionada.nombre}"
+					required="true" requiredMessage="Ingresar el nombre " />
+					
+				<h:outputText value="APELLIDO:" />
+				<p:inputText value="#{beanPersona.cedulaSelecionada.apellido}"
+					required="true" requiredMessage="Ingresar el apellido" />
+					
+				<h:outputText value="TELÉFONO:" />
+				<p:inputText value="#{beanPersona.cedulaSelecionada.telefono}"
+					required="true" requiredMessage="Ingresar el telefono" >
+					<p:keyFilter regEx="/[0-9]/i" />
+					</p:inputText>
+					
+				<h:outputText value="EMAIL:" />
+				<p:inputText value="#{beanPersona.cedulaSelecionada.mail}"
+					required="true" requiredMessage="Ingresar el mail" />
+					
+				<h:outputText value="DIRECCIÓN:" />
+				<p:inputText value="#{beanPersona.cedulaSelecionada.direccion}"
+					required="true" requiredMessage="Ingresar la direccion" />
+					
+				<h:outputText value="GÉNERO:" />
+				<p:selectOneMenu value="#{beanPersona.cedulaSelecionada.genero}"
+					style="width:200px">
+					<f:selectItem itemLabel="Selecionar uno" itemValue="0"
+						noSelectionOption="false">
+					</f:selectItem>
+					<f:selectItem itemLabel="Masculino" itemValue="Masculino">
+					</f:selectItem>
+					<f:selectItem itemLabel="Femenino" itemValue="Femenino">
+					</f:selectItem>
+				</p:selectOneMenu>
+				
+				<h:outputText value="CONTRASEÑA:" />
+				<p:password value="#{beanPersona.cedulaSelecionada.clave}" />
+				
+				<h:outputText value="CIUDAD:" />
+				<p:selectOneMenu value="#{beanPersona.idCiudad}" style="width:200px">
+					<f:selectItem itemLabel="Selecionar uno" itemValue="0">
+					</f:selectItem>
+					<f:selectItems value="#{beanCiudad.listaCiudad}" var="c"
+						itemLabel="#{c.nombre}" itemValue="#{c.idCiudad}"
+						noSelectionOption="true">
+					</f:selectItems>
+				</p:selectOneMenu>
+				
+				<h:outputText value="ESTADO CIVIL:" />
+				<p:selectOneMenu value="#{beanPersona.idEstadoCivil}"
+					style="width:200px">
+					<f:selectItem itemLabel="Selecionar uno" itemValue="0">
+					</f:selectItem>
+					<f:selectItems value="#{beanEstadoCivil.listaEstadoCivil}" var="e"
+						itemLabel="#{e.nombre}" itemValue="#{e.idEstadoCivil}"
+						noSelectionOption="true">
+					</f:selectItems>
+				</p:selectOneMenu>
+				
+				<h:outputText value="ROL:" />
+				<p:selectOneMenu value="#{beanPersona.idRol}" style="width:200px">
+					<f:selectItem itemLabel="Selecionar uno" itemValue="0">
+					</f:selectItem>
+					<f:selectItems value="#{beanRol.listaRol}" var="e"
+						itemLabel="#{e.nombre}" itemValue="#{e.idRol}"
+						noSelectionOption="true">
+					</f:selectItems>
+				</p:selectOneMenu>
+
+			</p:panelGrid>
+			<br />
+			<p:commandButton value="Actualizar" icon="pi pi-refresh"
+				update="@form,:form2"
+				actionListener="#{beanPersona.actionListenerActualizarPersona()}" />
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="SI" type="button"
+			styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+	</p:confirmDialog>
+</body>
+</html>

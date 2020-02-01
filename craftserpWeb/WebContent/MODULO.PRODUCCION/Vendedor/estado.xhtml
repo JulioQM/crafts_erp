@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+
+
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1,shrink-to-fit=no, user-scalable=no" />
+		<title>Manejo de datos estado</title>
+	</f:facet>
+
+
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form id="form1">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:menubar>
+		<f:facet name="options">
+				<p:commandButton value="INICIO" update="@form,:form2"
+				icon="pi pi-sign-out" action="#{beanPersona.salirSistema()}">
+			</p:commandButton>
+			</f:facet>
+			<p:submenu label="Menú" icon="pi pi-briefcase">
+				<p:menuitem  value="Registro Persona" action= "/faces/MODULO.SEGURIDAD/registro_persona.xhtml" icon="pi pi-angle-double-right" />
+				<p:menuitem  value="Registro Estado Civil" action= "/faces/MODULO.SEGURIDAD/registro_estado_civil.xhtml" icon="pi pi-angle-double-right" />
+				<p:menuitem value="Registro Ciudad" action= "/faces/MODULO.SEGURIDAD/registro_ciudad.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Rol" action= "/faces/MODULO.SEGURIDAD/registro_rol.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Tipo Usuario" action= "/faces/MODULO.SEGURIDAD/registro_tipo_usuario.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Ciudad" action= "/faces/MODULO.SEGURIDAD/registro_ciudad.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Producto" action= "/faces/MODULO.PRODUCTO/pro_producto.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Categoria" action= "/faces/MODULO.PRODUCTO/procategoria.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Catalogo" action= "/faces/MODULO.PRODUCTO/Cliente/catalogo.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Proveedor" action= "/faces/MODULO.PROVEEDOR/Administrador/proveedor.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Forma de Pago" action= "/faces/MODULO.VENTAS/formapago.xhtml" icon="pi pi-angle-double-left" />
+				
+			</p:submenu>
+		</p:menubar>
+		<p:panel header="Registro de nuevo Estado">
+			<p:panelGrid columns="2">
+
+				<h:outputText value="Ingrese el nombre: " />
+				<p:inputText value="#{beanEstado.estado.nombre}" />
+
+				<p:commandButton value="Insertar" icon="pi pi-plus"
+					update="@form,:form2"
+					actionListener="#{beanEstado.actionListenerInsertarEstado()}">
+				</p:commandButton>
+
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos Estado">
+			<p:dataTable value="#{beanEstado.listaestado}" reflow="true"
+				var="estado" paginator="true" rows="5">
+				<p:column headerText="ID" filterBy="#{estado.idEstado}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{estado.idEstado}" />
+				</p:column>
+				<p:column headerText="NOMBRE" filterBy="#{estado.nombre}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{estado.nombre}" />
+
+
+				</p:column>
+				<p:column headerText="Id" style="width:50px">
+					<h:outputText value="#{estado.idEstado}" />
+				</p:column>
+
+				<p:column headerText="Nombre" style="width:50px">
+					<h:outputText value="#{estado.nombre}" />
+				</p:column>
+				<p:column headerText="OPCIONES" priority="1">
+					<p:commandButton icon="pi pi-times" title="Eliminar" update="@form"
+						actionListener="#{beanEstado.actionEliminarEstado(estado.idEstado)}">
+						<p:confirm header="Confirmacion" message="Desea eliminar?"
+							icon="fa fa-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+					<p:commandButton icon="pi pi-pencil" title="Editar"
+						actionListener="#{beanEstado.actionEstadoSeleccionado(estado)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<p:dialog header="Editar Informacion" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="Id :" />
+			<h:outputText value="#{beanEstado.estadoseleccionado.idEstado}" />
+			<p:panelGrid columns="2">
+				<h:outputText value="Nombre:" />
+				<p:inputText value="#{beanEstado.estadoseleccionado.nombre}" />
+
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="pi pi-refresh"
+				update="@form,:form2"
+				actionListener="#{beanEstado.actionListenerActualizarEstado()}" />
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade">
+		<p:commandButton value="si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+		<p:commandButton value="no" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+	</p:confirmDialog>
+
+
+
+</body>
+</html>

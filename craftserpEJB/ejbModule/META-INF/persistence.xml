@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="craftserpDS" transaction-type="JTA">
+		<jta-data-source>java:/craftserpDS</jta-data-source>
+		<class>craftserp.model.entities.AudBitacora</class>
+		<class>craftserp.model.entities.Parametro</class>
+		<class>craftserp.model.entities.PrdEstado</class>
+		<class>craftserp.model.entities.PrdPedidoCabecera</class>
+		<class>craftserp.model.entities.PrdPedidoDetalle</class>
+		<class>craftserp.model.entities.ProCatalogo</class>
+		<class>craftserp.model.entities.ProCategoria</class>
+		<class>craftserp.model.entities.ProProducto</class>
+		<class>craftserp.model.entities.ProProductoCatalogo</class>
+		<class>craftserp.model.entities.PrvProveedor</class>
+		<class>craftserp.model.entities.SegCiudad</class>
+		<class>craftserp.model.entities.SegCompania</class>
+		<class>craftserp.model.entities.SegEstadoCivil</class>
+		<class>craftserp.model.entities.SegPersona</class>
+		<class>craftserp.model.entities.SegRole</class>
+		<class>craftserp.model.entities.VenFacturaCabecera</class>
+		<class>craftserp.model.entities.VenFacturaDetalle</class>
+		<class>craftserp.model.entities.VenFormaPago</class>
+	</persistence-unit>
+</persistence>

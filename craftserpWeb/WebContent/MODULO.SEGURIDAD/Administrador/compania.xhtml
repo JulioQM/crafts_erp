@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no" />
+		<title>Manejo de datos Compania</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form id="form1">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:menubar>
+			<p:submenu label="Menú" icon="pi pi-briefcase">
+				<p:menuitem  value="Registro Persona" action= "/faces/MODULO.SEGURIDAD/registro_persona.xhtml" icon="pi pi-angle-double-right" />
+				<p:menuitem  value="Registro Estado Civil" action= "/faces/MODULO.SEGURIDAD/registro_estado_civil.xhtml" icon="pi pi-angle-double-right" />
+				<p:menuitem value="Registro Ciudad" action= "/faces/MODULO.SEGURIDAD/registro_ciudad.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Rol" action= "/faces/MODULO.SEGURIDAD/registro_rol.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Tipo Usuario" action= "/faces/MODULO.SEGURIDAD/registro_tipo_usuario.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Ciudad" action= "/faces/MODULO.SEGURIDAD/registro_ciudad.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Producto" action= "/faces/MODULO.PRODUCTO/pro_producto.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Categoria" action= "/faces/MODULO.PRODUCTO/procategoria.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Catalogo" action= "/faces/MODULO.PRODUCTO/Cliente/catalogo.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Proveedor" action= "/faces/MODULO.PROVEEDOR/Administrador/proveedor.xhtml" icon="pi pi-angle-double-left" />
+				<p:menuitem value="Registro Forma de Pago" action= "/faces/MODULO.VENTAS/formapago.xhtml" icon="pi pi-angle-double-left" />
+				
+			</p:submenu>
+		</p:menubar>
+		<p:panel header="Registro de la Compania">
+			<p:panelGrid columns="2">
+				<h:outputText value="Ingrese el ruc : " />
+				<p:inputText value="#{beanCompania.compania.idRuc}" />
+				<h:outputText value="Ingrese el nombre : " />
+				<p:inputText value="#{beanCompania.compania.nombre}" />
+				<h:outputText value="Ingrese la dirección: " />
+				<p:inputText value="#{beanCompania.compania.direccion}" />
+				<h:outputText value="Ingrese el mail : " />
+				<p:inputText value="#{beanCompania.compania.mail}" />
+				<h:outputText value="Ingrese el teléfono : " />
+				<p:inputText value="#{beanCompania.compania.telefono}" />
+				<h:outputText value="Ingrese el ciudad : " />
+				<p:selectOneMenu value="#{beanCompania.ciudad}">
+					<f:selectItems value="#{beanCiudad.listaCiudad}" var="ciudad"
+						itemLabel="#{ciudad.nombre}" itemValue="#{ciudad.idCiudad}">
+					</f:selectItems>
+				</p:selectOneMenu>
+				<p:commandButton value="Insertar" icon="pi pi-plus"
+					update="@form,:form2"
+					actionListener="#{beanCompania.actionListenerInsertarCompania()}">
+				</p:commandButton>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+	<br />
+
+	<h:form id="form2">
+		<p:panel header="Datos de la Compania">
+			<p:dataTable value="#{beanCompania.listacompania}" reflow="true"
+				var="compania" paginator="true" rows="5">
+				<p:column headerText="RUC" filterBy="#{compania.idRuc}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{compania.idRuc}" />
+				</p:column>
+				<p:column headerText="NOMBRE" filterBy="#{compania.nombre}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{compania.nombre}" />
+				</p:column>
+				<p:column headerText="DIRECCION" filterBy="#{compania.direccion}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{compania.direccion}" />
+				</p:column>
+				<p:column headerText="MAIL" filterBy="#{compania.mail}">
+					<h:outputText value="#{compania.mail}" />
+				</p:column>
+				<p:column headerText="TELEFONO" filterBy="#{compania.telefono}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{compania.telefono}" />
+				</p:column>
+				<p:column headerText="CIUDAD" filterBy="#{compania.segCiudad.idCiudad}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{compania.segCiudad.nombre}" />
+				</p:column>
+				<p:column headerText="OPCIONES" priority="1">
+					<p:commandButton icon="pi pi-times" title="Eliminar" update="@form"
+						actionListener="#{beanCompania.actionListenerEliminarCompania(compania.idCompania)}">
+						<p:confirm header="Confirmación"
+							message="¿Seguro que desea eliminar?"
+							icon="fa fa-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+					<p:commandButton icon="pi pi-pencil" title="Editar"
+						actionListener="#{beanCompania.actionListenerSeleccionarCompania(compania)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<p:dialog header="Editar Información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+
+				<p:autoUpdate />
+			</p:growl>
+			
+			<p:panelGrid columns="2">
+				<h:outputText value="Ruc:" />
+				<p:inputText value="#{beanCompania.companiaseleccionada.idRuc}" />
+				<h:outputText value="Nombre:" />
+				<p:inputText value="#{beanCompania.companiaseleccionada.nombre}" />
+				<h:outputText value="Dirección:" />
+				<p:inputText value="#{beanCompania.companiaseleccionada.direccion}" />
+				<h:outputText value="Mail:" />
+				<p:inputText value="#{beanCompania.companiaseleccionada.mail}" />
+				<h:outputText value="Teléfono:" />
+				<p:inputText value="#{beanCompania.companiaseleccionada.telefono}" />
+				
+				<h:outputText value="Ciudad: " />
+				<p:selectOneMenu value="#{beanCompania.ciudad}">
+					<f:selectItems value="#{beanCiudad.listaCiudad}" var="ciudad"
+						itemLabel="#{ciudad.nombre}" itemValue="#{ciudad.idCiudad}">
+					</f:selectItems>
+				</p:selectOneMenu>
+				
+				<!--  <p:inputText
+					value="#{beanCompania.companiaseleccionada.segCiudad.idCiudad}" />-->
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="pi pi-refresh"
+				update="@form,:form2"
+				actionListener="#{beanCompania.actionListenerActualizarCompania()}" />
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade">
+		<p:commandButton value="si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+		<p:commandButton value="no" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+	</p:confirmDialog>
+</body>
+</html>

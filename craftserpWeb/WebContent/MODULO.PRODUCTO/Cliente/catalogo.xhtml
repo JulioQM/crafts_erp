@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+
+
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1,shrink-to-fit=no, user-scalable=no" />
+		<title>Manejo de datos Catalogo</title>
+	</f:facet>
+
+
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form id="form1">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:commandLink  icon="pi pi-home" update="@form,:form2" action= "/faces/landing.html">
+			<h:outputText value="Inicio"/>
+		</p:commandLink>
+		<p:panel header="Registro del Catalogo">
+			<p:panelGrid columns="2">
+
+				<h:outputText value="Ingrese el nombre : " />
+				<p:inputText value="#{beanCatalogo.catalogo.nombre}" />
+				<h:outputText value="Ingrese la descripción: " />
+				<p:inputText value="#{beanCatalogo.catalogo.descripcion}" />
+				<h:outputText value="Ingrese el imagen: " />
+				<p:inputText value="#{beanCatalogo.catalogo.imagen}" />
+				<p:commandButton value="Insertar" icon="pi pi-plus"
+					update="@form,:form2"
+					actionListener="#{beanCatalogo.actionListenerInsertar()}">
+				</p:commandButton>
+
+			</p:panelGrid>
+		</p:panel>
+
+	</h:form>
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos Catalogo">
+			<p:dataTable value="#{beanCatalogo.listaProCatalogos}" reflow="true"
+				var="catalogo" paginator="true" rows="5">
+				<p:column headerText="ID" filterBy="#{catalogo.idCatalogo}"
+					filterMatchMode="contains" priority="1" style="width:50px">
+					<h:outputText value="#{catalogo.idCatalogo}" />
+				</p:column>
+				<p:column headerText="NOMBRE" filterBy="#{catalogo.nombre}"
+					filterMatchMode="contains" priority="1" style="width:50px">
+					<h:outputText value="#{catalogo.nombre}" />
+
+
+				</p:column>
+
+
+				<p:column headerText="Nombre" style="width:50px">
+					<h:outputText value="#{catalogo.nombre}" />
+				</p:column>
+				<p:column headerText="Descripcion" style="width:50px">
+					<h:outputText value="#{catalogo.descripcion}" />
+				</p:column>
+				<p:column headerText="Imagen" style="width:50px">
+					<h:outputText value="#{catalogo.imagen}" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+
+
+
+</body>
+</html>
