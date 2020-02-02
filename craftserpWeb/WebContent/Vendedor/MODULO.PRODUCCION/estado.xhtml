@@ -52,21 +52,21 @@
 		<p:panel header="Datos Estado">
 			<p:dataTable value="#{beanEstado.listaestado}" reflow="true"
 				var="estado" paginator="true" rows="5">
-				<p:column headerText="ID" filterBy="#{estado.idEstado}"
+				<!-- <p:column headerText="ID" filterBy="#{estado.idEstado}"
 					filterMatchMode="contains" priority="1">
 					<h:outputText value="#{estado.idEstado}" />
 				</p:column>
 				<p:column headerText="NOMBRE" filterBy="#{estado.nombre}"
 					filterMatchMode="contains" priority="1">
-					<h:outputText value="#{estado.nombre}" />
+					<h:outputText value="#{estado.nombre}" /> 
 
 
-				</p:column>
-				<p:column headerText="Id" style="width:50px">
+				</p:column>-->
+				<p:column headerText="Id" >
 					<h:outputText value="#{estado.idEstado}" />
 				</p:column>
 
-				<p:column headerText="Nombre" style="width:50px">
+				<p:column headerText="Nombre" >
 					<h:outputText value="#{estado.nombre}" />
 				</p:column>
 				<!-- <p:column headerText="OPCIONES" priority="1">

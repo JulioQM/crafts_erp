@@ -29,20 +29,7 @@
 				icon="pi pi-sign-out" action="#{beanPersona.salirSistema()}">
 			</p:commandButton>
 			</f:facet>
-			<p:submenu label="Menú" icon="pi pi-briefcase">
-				<p:menuitem  value="Registro Persona" action= "/faces/MODULO.SEGURIDAD/Administrador/registro_persona.xhtml" icon="pi pi-angle-double-right" />
-				<p:menuitem  value="Registro Estado Civil" action= "/faces/MODULO.SEGURIDAD/Cliente/registro_estado_civil.xhtml" icon="pi pi-angle-double-right" />
-				
-				<p:menuitem value="Registro Rol" action= "/faces/MODULO.SEGURIDAD/Administrador/registro_rol.xhtml" icon="pi pi-angle-double-left" />
-				<p:menuitem value="Registro Tipo Usuario" action= "/faces/MODULO.SEGURIDAD/Administrador/registro_tipo_usuario.xhtml" icon="pi pi-angle-double-left" />
-				<p:menuitem value="Registro Ciudad" action= "/faces/MODULO.SEGURIDAD/Vendedor/registro_ciudad.xhtml" icon="pi pi-angle-double-left" />
-				<p:menuitem value="Registro Producto" action= "/faces/MODULO.PRODUCTO/Vendedor/pro_producto.xhtml" icon="pi pi-angle-double-left" />
-				<p:menuitem value="Registro Categoria" action= "/faces/MODULO.PRODUCTO/Vendedor/procategoria.xhtml" icon="pi pi-angle-double-left" />
-				<p:menuitem value="Registro Catalogo" action= "/faces/MODULO.PRODUCTO/Cliente/catalogo.xhtml" icon="pi pi-angle-double-left" />
-				<p:menuitem value="Registro Proveedor" action= "/faces/MODULO.PROVEEDOR/Administrador/proveedor.xhtml" icon="pi pi-angle-double-left" />
-				<p:menuitem value="Registro Forma de Pago" action= "/faces/MODULO.VENTAS/Vendedor/formapago.xhtml" icon="pi pi-angle-double-left" />
-				
-			</p:submenu>
+			
 		</p:menubar>
 		<p:panel header="Registro de nueva Proveedor">
 			<p:panelGrid columns="2">
@@ -78,7 +65,7 @@
 		<p:panel header="Datos Proveedores">
 			<p:dataTable value="#{beanProveedor.listaPrvProveedores}"
 				reflow="true" var="proveedor" paginator="true" rows="5">
-				<p:column headerText="RUC" filterBy="#{ciudad.idRuc}"
+				<!--  <p:column headerText="RUC" filterBy="#{ciudad.idRuc}"
 					filterMatchMode="contains" priority="1">
 					<h:outputText value="#{proveedor.idRuc}" />
 				</p:column>
@@ -90,30 +77,30 @@
 
 				<p:column headerText="Id" style="width:50px">
 					<h:outputText value="#{proveedor.idProveedor}" />
-				</p:column>
+				</p:column>-->
 
-				<p:column headerText="ruc" style="width:50px">
+				<p:column headerText="ruc" >
 					<h:outputText value="#{proveedor.idRuc}" />
 				</p:column>
-				<p:column headerText="apellido" style="width:50px">
+				<p:column headerText="apellido" >
 					<h:outputText value="#{proveedor.apellido}" />
 				</p:column>
-				<p:column headerText="nombre" style="width:50px">
+				<p:column headerText="nombre" >
 					<h:outputText value="#{proveedor.nombre}" />
 				</p:column>
-				<p:column headerText="telefono" style="width:50px">
+				<p:column headerText="telefono" >
 					<h:outputText value="#{proveedor.telefono}" />
 				</p:column>
-				<p:column headerText="nombre empresa" style="width:50px">
+				<p:column headerText="nombre empresa">
 					<h:outputText value="#{proveedor.nombreEmpresa}" />
 				</p:column>
-				<p:column headerText="direccion" style="width:50px">
+				<p:column headerText="direccion" >
 					<h:outputText value="#{proveedor.direccion}" />
 				</p:column>
-				<p:column headerText="mail" style="width:50px">
+				<p:column headerText="mail" >
 					<h:outputText value="#{proveedor.mail}" />
 				</p:column>
-				<p:column headerText="ciudad" style="width:50px">
+				<p:column headerText="ciudad">
 					<h:outputText value="#{proveedor.segCiudad.idCiudad}" />
 				</p:column>
 				<p:column  headerText="OPCIONES" priority="1">
