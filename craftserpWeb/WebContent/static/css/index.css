@@ -41,7 +41,7 @@ body {
 .form-group::before {
 	font-family: "Font Awesome\ 5 Free";
 	position: absolute;
-	left: 28px;
+	left: 40px;
 	font-size: 22px;
 	padding-top: 4px;
 }
