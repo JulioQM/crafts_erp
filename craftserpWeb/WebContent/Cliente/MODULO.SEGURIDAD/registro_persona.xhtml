@@ -13,17 +13,14 @@
 	</f:facet>
 </h:head>
 <body>
-<div align="center">
-	<p:growl>
-		<p:autoUpdate />
-	</p:growl>
-	
-		<h:form >
-			<!-- <p:messages>
-				<p:autoUpdate />
-			</p:messages> -->
-			<p:panel header="Registro de nueva persona" >
-				<p:panelGrid columns="2" >
+	<div align="center">
+		<p:growl>
+			<p:autoUpdate />
+		</p:growl>
+
+		<h:form>
+			<p:panel header="Registro de nueva persona">
+				<p:panelGrid columns="2">
 					<h:outputText value="CÉDULA:" />
 					<p:inputText value="#{beanPersona.persona.idCedula}"
 						required="true"
@@ -121,10 +118,7 @@
 
 		</h:form>
 	</div>
-
-
 	<br />
-
 	<p:dialog header="Editor de información" widgetVar="dlgEdicion"
 		modal="true">
 		<h:form id="formEdicion">
