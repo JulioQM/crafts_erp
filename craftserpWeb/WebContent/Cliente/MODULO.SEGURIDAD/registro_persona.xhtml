@@ -100,7 +100,7 @@
 					<p:selectOneMenu value="#{beanPersona.idRol}" style="width:190px"
 						required="true" requiredMessage="Escoga el rol" label="Rol">
 						<f:selectItems value="#{beanRol.listaRol}" var="e"
-							itemLabel="#{e.nombre}" itemValue="1">
+							itemLabel="#{e.nombre}" itemValue="#{e.idRol}">
 						</f:selectItems>
 					</p:selectOneMenu>
 

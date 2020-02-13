@@ -55,6 +55,9 @@ public class ManagerSeguridad {
 		else if (usuario.getSegRole().getNombre().equals("Administrador"))
 			// loginDTO.setRutaAcceso("/supervisor/index.xhtml");
 			loginDTO.setRutaAcceso("/Administrador/Seguridad.html");
+		else if (usuario.getSegRole().getNombre().equals("Vendedor"))
+			// loginDTO.setRutaAcceso("/supervisor/index.xhtml");
+			loginDTO.setRutaAcceso("/Vendedor/Producto.html");
 
 		return loginDTO;
 //		return "";
