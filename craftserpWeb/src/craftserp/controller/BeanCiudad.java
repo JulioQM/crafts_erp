@@ -13,6 +13,8 @@ import javax.inject.Named;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 import craftserp.model.entities.SegCiudad;
 import craftserp.model.manager.ManagerCiudad;
 import java.io.Serializable;
@@ -73,11 +75,12 @@ public class BeanCiudad implements Serializable {
 			e.printStackTrace();
 		}
 	}*/
-	public String actionReporte(){
+	
+	/*public String actionReporte(){
 		Map<String,Object> parametros=new HashMap<String,Object>();
 		/*parametros.put("p_titulo_principal",p_titulo_principal);
 		parametros.put("p_titulo",p_titulo);*/
-		FacesContext context=FacesContext.getCurrentInstance();
+		/*FacesContext context=FacesContext.getCurrentInstance();
 		ServletContext servletContext=(ServletContext)context.getExternalContext().getContext();
 		String ruta=servletContext.getRealPath("Administrador/MODULO.SEGURIDAD/craftserp.jasper");
 		System.out.println(ruta);
@@ -99,7 +102,7 @@ public class BeanCiudad implements Serializable {
 		e.printStackTrace();
 		}
 		return "";
-		}
+		}*/
 
 	// set y get
 	public List<SegCiudad> getListaCiudad() {
