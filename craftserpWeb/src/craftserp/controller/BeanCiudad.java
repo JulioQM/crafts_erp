@@ -1,15 +1,23 @@
 package craftserp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import craftserp.model.entities.SegCiudad;
 import craftserp.model.manager.ManagerCiudad;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 @Named
 @SessionScoped
@@ -65,6 +73,33 @@ public class BeanCiudad implements Serializable {
 			e.printStackTrace();
 		}
 	}*/
+	public String actionReporte(){
+		Map<String,Object> parametros=new HashMap<String,Object>();
+		/*parametros.put("p_titulo_principal",p_titulo_principal);
+		parametros.put("p_titulo",p_titulo);*/
+		FacesContext context=FacesContext.getCurrentInstance();
+		ServletContext servletContext=(ServletContext)context.getExternalContext().getContext();
+		String ruta=servletContext.getRealPath("Administrador/MODULO.SEGURIDAD/craftserp.jasper");
+		System.out.println(ruta);
+		HttpServletResponse response=(HttpServletResponse)context.getExternalContext().getResponse();
+		response.addHeader("Content-disposition", "attachment;filename=blogs.pdf");
+		response.setContentType("application/pdf");
+		try {
+		Class.forName("org.postgresql.Driver");
+		Connection connection = null;
+		connection = DriverManager.getConnection(
+		"jdbc:postgresql://localhost:5432/craftserp","postgres", "");
+		JasperPrint impresion=JasperFillManager.fillReport(ruta, parametros,connection);
+		JasperExportManager.exportReportToPdfStream(impresion, response.getOutputStream());
+		context.getApplication().getStateManager().saveView ( context ) ;
+		System.out.println("reporte generado.");
+		context.responseComplete();
+		} catch (Exception e) {
+		JSFUtil.crearMensajeError(e.getMessage());
+		e.printStackTrace();
+		}
+		return "";
+		}
 
 	// set y get
 	public List<SegCiudad> getListaCiudad() {
