@@ -30,30 +30,20 @@
 		<p:panel header="Datos  Producto-Catalogo">
 			<p:dataTable value="#{beanProductoCatalogo.listaProProductoCatalogos}" reflow="true"
 				var="productocatalogo" paginator="true" rows="5">
-				<p:column headerText="ID" filterBy="#{productocatalogo.idProductoCatalogo}"
-					filterMatchMode="contains" priority="1">
-					<h:outputText value="#{productocatalogo.idProductoCatalogo}" />
-				</p:column>
-				<p:column headerText="PRODUCTO" filterBy="#{productocatalogo.proCatalogo.idCatalogo}"
-					filterMatchMode="contains" priority="1">
-					<h:outputText value="#{productocatalogo.proCatalogo.idCatalogo}" />
+				
+				
 
 
-				</p:column>
-				<p:column headerText="CATALOGO" filterBy="#{productocatalogo.proProducto.codigo}"
-					filterMatchMode="contains" priority="1">
-					<h:outputText value="#{productocatalogo.proProducto.codigo}" />
-
-
-				</p:column>
-				<p:column headerText="Id" style="width:50px">
+				
+				
+				<p:column headerText="Id" >
 					<h:outputText value="#{productocatalogo.idProductoCatalogo}" />
 				</p:column>
 
-				<p:column headerText="CATALOGO" style="width:50px">
+				<p:column headerText="CATALOGO" >
 					<h:outputText value="#{productocatalogo.proCatalogo}" />
 				</p:column>
-				<p:column headerText="PRODUCTO" style="width:50px">
+				<p:column headerText="PRODUCTO" >
 					<h:outputText value="#{productocatalogo.proProducto}" />
 				</p:column>
 				

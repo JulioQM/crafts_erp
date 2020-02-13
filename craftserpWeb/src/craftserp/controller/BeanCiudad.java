@@ -1,8 +1,8 @@
 package craftserp.controller;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -10,16 +10,16 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.ServletContext;
+//import javax.servlet.http.HttpServletResponse;
 
 
 
 import craftserp.model.entities.SegCiudad;
 import craftserp.model.manager.ManagerCiudad;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
 
 @Named
 @SessionScoped
