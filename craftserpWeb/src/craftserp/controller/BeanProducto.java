@@ -29,6 +29,7 @@ public class BeanProducto implements Serializable {
 
 		listaproducto = managerProducto.findAllProducto();
 		producto = new ProProducto();
+		productoseleccionado=new ProProducto();
 	}
 
 	public void actionListenerInsertarProducto() {

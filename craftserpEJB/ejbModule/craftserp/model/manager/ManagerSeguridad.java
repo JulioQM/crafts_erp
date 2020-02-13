@@ -30,7 +30,9 @@ public class ManagerSeguridad {
 	 *                   error con la consulta a la base de datos.
 	 */
 //ves de codigoUsuario voy a cambiarle a cedula
+	//esta comentado por lo que le voy a convertir a string
 	public LoginDTO accederSistema(String idCedula, String clave) throws Exception {
+//		public String accederSistema(String idCedula, String clave) throws Exception {
 		// SegPersona usuario = (SegPersona) managerDAO.findById(SegPersona.class,
 		// idCedula);
 		SegPersona usuario = new SegPersona();
@@ -49,12 +51,13 @@ public class ManagerSeguridad {
 		// dependiendo del tipo de usuario, configuramos la ruta de acceso a las pags
 		// web:
 		if (usuario.getSegRole().getNombre().equals("Cliente"))
-			loginDTO.setRutaAcceso("/prueba/cliente.xhtml");
+			loginDTO.setRutaAcceso("/Cliente/Producto.html");
 		else if (usuario.getSegRole().getNombre().equals("Administrador"))
 			// loginDTO.setRutaAcceso("/supervisor/index.xhtml");
-			loginDTO.setRutaAcceso("/prueba/administrador.xhtml");
+			loginDTO.setRutaAcceso("/Administrador/Seguridad.html");
 
 		return loginDTO;
+//		return "";
 	}
 
 	public SegPersona findUsuarioById(String idCedula) throws Exception {
